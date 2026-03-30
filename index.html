@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendhub.co | Premium E-Commerce</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --primary-blue: #3b82f6;
+            --soft-bg: #f3f4f6;
+            --text-dark: #1f2937;
+            --white: #ffffff;
+            --yellow-accent: #facc15;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--primary-blue); }
+
+        .search-container {
+            flex: 0 1 400px;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px 20px 10px 45px;
+            border-radius: 50px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            outline: none;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .nav-right { display: flex; align-items: center; gap: 25px; }
+        .nav-right a { text-decoration: none; color: #4b5563; font-weight: 500; font-size: 14px; }
+        
+        .cart-trigger { position: relative; cursor: pointer; }
+        #cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--primary-blue);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .btn-login {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
+
+        .hero {
+            background: #e5e7eb;
+            border-radius: 30px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            overflow: hidden;
+            min-height: 500px;
+            margin-bottom: 60px;
+        }
+
+        .hero-text { padding: 80px 60px; }
+        .hero-text h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-text h1 span { color: var(--primary-blue); }
+        .hero-text p { color: #6b7280; margin-bottom: 40px; font-size: 18px; }
+
+        .promo-boxes { display: flex; gap: 20px; }
+        .promo-card {
+            background: var(--yellow-accent);
+            padding: 20px;
+            border-radius: 20px;
+            width: 180px;
+            font-weight: 700;
+        }
+        .promo-card.white { background: white; }
+        .promo-card button {
+            margin-top: 15px;
+            border: none;
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .hero-img {
+            background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- PRODUCTS --- */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 15px;
+            transition: var(--transition);
+            border: 1px solid #f1f5f9;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .img-wrapper {
+            background: #f8fafc;
+            border-radius: 18px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .img-wrapper img { max-width: 80%; transition: var(--transition); }
+        .product-card:hover img { transform: scale(1.1); }
+
+        .price { font-weight: 800; color: var(--primary-blue); font-size: 18px; }
+        .product-name { font-size: 16px; color: #334155; margin: 5px 0 15px 0; }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #f1f5f9;
+            color: var(--text-dark);
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-btn:hover { background: var(--primary-blue); color: white; }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-img { display: none; }
+            .navbar { flex-wrap: wrap; gap: 15px; }
+            .search-container { order: 3; flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">trendhub<span>.co</span></div>
+        
+        <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search product in Trendhub...">
+        </div>
+
+        <div class="nav-right">
+            <a href="#">About</a>
+            <a href="#">Help</a>
+            <div class="cart-trigger" onclick="alert('Cart functionality coming soon!')">
+                <i data-lucide="shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <button class="btn-login">Login</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Your <span>One-Stop</span><br>Shop for Everything!</h1>
+                <p>Premium quality products with secure payments and fast delivery globally.</p>
+                
+                <div class="promo-boxes">
+                    <div class="promo-card">
+                        <p>Back to School</p>
+                        <button>Claim 30% Off</button>
+                    </div>
+                    <div class="promo-card white">
+                        <p>Beauty Care</p>
+                        <button>View Deals</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-img"></div>
+        </section>
+
+        <section class="products">
+            <div class="section-title">
+                <h2>Product of The Month</h2>
+                <a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">View all →</a>
+            </div>
+
+            <div id="product-container" class="product-grid">
+                </div>
+        </section>
+    </div>
+
+    <script>
+        // Data definition
+        const inventory = [
+            { id: 1, name: "Premium Blue Backpack", price: 145, img: "https://www.pngarts.com/files/3/Backpack-PNG-High-Quality-Image.png" },
+            { id: 2, name: "Air Max Custom Sneakers", price: 210, img: "https://www.pngarts.com/files/3/Women-Shoes-PNG-Image-with-Transparent-Background.png" },
+            { id: 3, name: "Pro Wireless Headphones", price: 320, img: "https://www.pngarts.com/files/4/Headphone-PNG-Transparent-Image.png" },
+            { id: 4, name: "Casual Outdoor Hat", price: 45, img: "https://www.pngarts.com/files/1/Hat-PNG-Transparent-Image.png" },
+            { id: 5, name: "Professional Volleyball", price: 85, img: "https://www.pngarts.com/files/4/Volleyball-PNG-Download-Image.png" },
+            { id: 6, name: "Adjustable Dumbbell 10kg", price: 120, img: "https://www.pngarts.com/files/1/Dumbbell-PNG-Photo.png" }
+        ];
+
+        let cart = [];
+
+        // Function to render products
+        function loadProducts() {
+            const container = document.getElementById('product-container');
+            container.innerHTML = inventory.map(item => `
+                <div class="product-card">
+                    <div class="img-wrapper">
+                        <img src="${item.img}" alt="${item.name}">
+                    </div>
+                    <div class="price">$${item.price}</div>
+                    <div class="product-name">${item.name}</div>
+                    <button class="add-btn" onclick="addToCart(${item.id})">Buy Now</button>
+                </div>
+            `).join('');
+        }
+
+        // Add to cart logic
+        function addToCart(id) {
+            const selected = inventory.find(p => p.id === id);
+            cart.push(selected);
+            
+            // UI Feedback
+            const countLabel = document.getElementById('cart-count');
+            countLabel.innerText = cart.length;
+            
+            // Animation for feedback
+            countLabel.style.transform = "scale(1.5)";
+            setTimeout(() => countLabel.style.transform = "scale(1)", 200);
+            
+            console.log("Cart updated:", cart);
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            lucide.createIcons(); // Initialize the icons
+        });
+    </script>
+</body>
+</html>
